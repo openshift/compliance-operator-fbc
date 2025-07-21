@@ -13,7 +13,12 @@ do
     cp "${CONTAINERFILE}" "catalog/v${VERSION}/Containerfile"
     sed -i "s/OCP_VERSION/${VERSION}/g" "catalog/v${VERSION}/Containerfile"
     opm alpha convert-template basic -o yaml "./catalog-migrate-${VERSION}/compliance-operator/catalog.json" > "catalog/v${VERSION}/catalog-template.yaml"
-    opm alpha render-template basic -o yaml "catalog/v${VERSION}/catalog-template.yaml" > "catalog/v${VERSION}/compliance-operator/catalog.yaml"
+
+    if [[ "$OCP_V" =~ ("4.12"|"4.13"|"4.14"|"4.15"|"4.16") ]]; then
+        opm alpha render-template basic -o yaml "catalog/v${VERSION}/catalog-template.yaml" > "catalog/v${VERSION}/compliance-operator/catalog.yaml"
+    else
+        opm alpha render-template basic -o yaml --migrate-level=bundle-object-to-csv-metadata "catalog/v${VERSION}/catalog-template.yaml" > "catalog/v${VERSION}/compliance-operator/catalog.yaml"
+    fi
 
     echo "Building locally to ensure it works"
     podman build -t "co-fbc-${VERSION}" -f "catalog/v${VERSION}/Containerfile" "catalog/v${VERSION}/" && rm -rf "./catalog-migrate-${VERSION}"
