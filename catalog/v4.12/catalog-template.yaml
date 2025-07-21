@@ -38,17 +38,17 @@ entries:
   schema: olm.channel
 - image: registry.redhat.io/openshift4/compliance-rhel8-operator-metadata@sha256:1c06868bce1f5d7145ef658bfcc284c44011aa24a17166aa124547b38f2259e4
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:8a2194d8d26dff03ec53ac0ab93c62c268e48675079a88db18bb14a977a391be
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:f176e3a1ca1c77fb285bae8d9009a91abf310363eed4fc79a778b7306a38e480
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:cf9d9e16e4660cfff746b3517d32fc73f4d9716d61c5bcae60a60a8fb42ae38e
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:a4f4aabb46ca34f6bdd63e752f6b7de37ac41fed6cf87709506857b4819d4e98
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:91546ecf49cb877652a69f2773054af56c6cf5011d61ab190e1cfee156fc66f9
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:8e2ae4ec6fb99d69494763893be9e0a22f85f7fdfcfe09d90df07909c94877be
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:588fb1f9c84a146e76dcaeb418c1202ecd967f7e37b2f0e680c8aab7bc30726a
   schema: olm.bundle
 schema: olm.template.basic
 
