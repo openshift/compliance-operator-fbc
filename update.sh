@@ -6,7 +6,8 @@ IFS=$'\n\t'
 OCP_VERSIONS=(4.12 4.13 4.14 4.15 4.16 4.17 4.18 4.19)
 
 # Old (tag-based) image:
-NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.7"
+# NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.7"
+NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release@sha256:9ad921d46cede439ad5725165a5345b939bb07f2cee3f4866051d9bdc1df2583"
 
 # New registry/repo to use, but we’ll attach the old image’s actual digest.
 REDHAT_REGISTRY_REPO="registry.redhat.io/compliance/openshift-compliance-operator-bundle"
@@ -24,9 +25,10 @@ if [[ -z "${DIGEST}" || "${DIGEST}" == "null" ]]; then
 fi
 
 # Construct the new fully qualified image:
-REDHAT_IMAGE="${REDHAT_REGISTRY_REPO}@${DIGEST}"
+#REDHAT_IMAGE="${REDHAT_REGISTRY_REPO}@${DIGEST}"
+REDHAT_IMAGE="${NEW_BUNDLE}"
 echo "✅ Found digest: ${DIGEST}"
-echo "   New image reference will be: ${REDHAT_IMAGE}"
+echo "   New image reference will be: ${NEW_BUNDLE}"
 echo
 
 for OCP_V in "${OCP_VERSIONS[@]}"; do
