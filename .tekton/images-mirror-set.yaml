@@ -1,0 +1,21 @@
+complianccompliancepiVersion: operator.openshift.io/v1alpha1
+kind: ImageDigestMirrorSet
+metadata:
+  name: compliance-operator-mirror-set
+spec:
+  imageDigestMirrors:
+  - mirrors:
+    - quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release
+    source: registry.redhat.io/compliance/openshift-compliance-operator-bundle
+  - mirrors:
+    - quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-release
+    source: registry.redhat.io/compliance/openshift-compliance-rhel8-operator
+  - mirrors:
+    - quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-openscap-release
+    source: registry.redhat.io/compliance/openshift-compliance-openscap-rhel8
+  - mirrors:
+    - quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-content-release
+    source: registry.redhat.io/compliance/openshift-compliance-content-rhel8
+  - mirrors:
+    - quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-must-gather-release
+    source: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8
