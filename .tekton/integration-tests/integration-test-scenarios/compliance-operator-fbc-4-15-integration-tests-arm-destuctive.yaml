@@ -16,7 +16,7 @@ spec:
     - name: gangway_api_url
       value: https://gangway-ci.apps.ci.l2s4.p1.openshiftapps.com
     - name: ocp_ci_job_name
-      value: periodic-ci-openshift-openshift-tests-private-release-4.15-arm64-nightly-baremetal-upi-ovn-ipv4-f14-compliance-destructive
+      value: periodic-ci-openshift-openshift-tests-private-release-4.15-arm64-nightly-baremetal-upi-ovn-ipv4-f28-compliance-destructive
     - name: index_image
       value: MULTISTAGE_PARAM_OVERRIDE_INDEX_IMAGE
   resolverRef:
