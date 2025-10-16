@@ -4,7 +4,7 @@ kind: IntegrationTestScenario
 metadata:
   annotations:
     test.appstudio.openshift.io/optional: "true"
-  name: compliance-operator-fbc-v4-18-e2e-tests-arm-mixarch-destructive
+  name: compliance-operator-fbc-4-18-e2e-tests-arm-mixarch-destructive
   namespace: ocp-isc-tenant
 spec:
   application: compliance-operator-fbc-4-18
