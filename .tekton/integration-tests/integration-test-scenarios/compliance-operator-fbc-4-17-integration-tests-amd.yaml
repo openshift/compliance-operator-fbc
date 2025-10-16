@@ -4,7 +4,7 @@ kind: IntegrationTestScenario
 metadata:
   annotations:
     test.appstudio.openshift.io/optional: "true"
-  name: compliance-operator-fbc-4-17-e2e-tests-arm
+  name: compliance-operator-fbc-4-17-e2e-tests-amd
   namespace: ocp-isc-tenant
 spec:
   application: compliance-operator-fbc-4-17
