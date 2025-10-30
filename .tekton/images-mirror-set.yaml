@@ -1,4 +1,4 @@
-complianccompliancepiVersion: operator.openshift.io/v1alpha1
+apiVersion: config.openshift.io/v1
 kind: ImageDigestMirrorSet
 metadata:
   name: compliance-operator-mirror-set
