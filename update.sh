@@ -3,16 +3,16 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # --- CONFIGURATION ---
-OCP_VERSIONS=(5.12 4.13 4.14 4.15 4.16 4.17 4.18 4.19 4.20 4.21)
+OCP_VERSIONS=(4.12 4.13 4.14 4.15 4.16 4.17 4.18 4.19 4.20 4.21)
 
 # Old (tag-based) image:
-NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.7"
+NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.8"
 
 # New registry/repo to use, but we’ll attach the old image’s actual digest.
 REDHAT_REGISTRY_REPO="registry.redhat.io/compliance/openshift-compliance-operator-bundle"
 
 # (Optional) Some additional parameters you might use later
-OP_V="1.7.1"
+OP_V="1.8.0"
 CSV_NEW="compliance-operator.v${OP_V}"
 SKIP_RANGE=">=1.0.0 <${OP_V}"
 
@@ -31,6 +31,7 @@ echo
 
 for OCP_V in "${OCP_VERSIONS[@]}"; do
   CATALOG="catalog/v${OCP_V}/compliance-operator/catalog.yaml"
+  CATALOG_TEMPLATE="catalog/v${OCP_V}/catalog-template.yaml"
 
   if [[ ! -f "${CATALOG}" ]]; then
     echo "⚠️  Skipping ${OCP_V}: No ${CATALOG} found."
