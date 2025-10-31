@@ -7,11 +7,11 @@ metadata:
   name: compliance-operator-fbc-4-20-e2e-tests-amd-destructive
   namespace: ocp-isc-tenant
 spec:
-  application: compliance-operator-fbc-4-19
+  application: compliance-operator-fbc-4-20
   contexts:
-  - description: execute the integration test when component compliance-operator-fbc-4-19 updates
+  - description: execute the integration test when component compliance-operator-fbc-4-20 updates
       state
-    name: component_compliance-operator-fbc-4-19
+    name: component_compliance-operator-fbc-4-20
   params:
     - name: gangway_api_url
       value: https://gangway-ci.apps.ci.l2s4.p1.openshiftapps.com
