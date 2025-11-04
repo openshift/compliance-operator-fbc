@@ -4,19 +4,19 @@ kind: IntegrationTestScenario
 metadata:
   annotations:
     test.appstudio.openshift.io/optional: "true"
-  name: compliance-operator-fbc-4-19-e2e-tests-arm
+  name: compliance-operator-fbc-4-21-e2e-tests-amd-destructive
   namespace: ocp-isc-tenant
 spec:
-  application: compliance-operator-fbc-4-19
+  application: compliance-operator-fbc-4-21
   contexts:
-  - description: execute the integration test when component compliance-operator-fbc-4-19 updates
+  - description: execute the integration test when component compliance-operator-fbc-4-21 updates
       state
-    name: component_compliance-operator-fbc-4-19
+    name: component_compliance-operator-fbc-4-21
   params:
     - name: gangway_api_url
       value: https://gangway-ci.apps.ci.l2s4.p1.openshiftapps.com
     - name: ocp_ci_job_name
-      value: periodic-ci-openshift-openshift-tests-private-release-4.19-arm64-nightly-gcp-ipi-proxy-private-f28-compliance
+      value: periodic-ci-openshift-openshift-tests-private-release-4.21-amd64-nightly-baremetalds-ipi-ovn-lvms-f14-compliance-destructive
     - name: index_image
       value: MULTISTAGE_PARAM_OVERRIDE_INDEX_IMAGE
   resolverRef:
