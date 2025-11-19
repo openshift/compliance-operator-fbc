@@ -3771,7 +3771,7 @@ relatedImages:
     name: operator
 schema: olm.bundle
 ---
-image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:e17354bbf4f9358baea77bc2dcd5c576913ad42d0902826335a6b9b37dcf57f1
+image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:0bc0b7a20ce3c6303a45a699f44d2b90597b6a62846e89a5bca285b3228a9a52
 name: compliance-operator.v1.8.0
 package: compliance-operator
 properties:
@@ -3878,7 +3878,7 @@ properties:
                 "scans": [
                   {
                     "content": "ssg-rhcos4-ds.xml",
-                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:61254e93bee0656607a4bec5e058cacaf4a907ea7f7ffcd233a6f594ab7d2a00",
+                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:1a9ed321d28da1ae089684d4bfb1c206a6ca2442f5725656c48c6c309e128e77",
                     "name": "workers-scan",
                     "nodeSelector": {
                       "node-role.kubernetes.io/worker": ""
@@ -3887,7 +3887,7 @@ properties:
                   },
                   {
                     "content": "ssg-ocp4-ds.xml",
-                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:61254e93bee0656607a4bec5e058cacaf4a907ea7f7ffcd233a6f594ab7d2a00",
+                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:1a9ed321d28da1ae089684d4bfb1c206a6ca2442f5725656c48c6c309e128e77",
                     "name": "platform-scan",
                     "profile": "xccdf_org.ssgproject.content_profile_moderate",
                     "scanType": "Platform"
@@ -3904,7 +3904,7 @@ properties:
               },
               "spec": {
                 "contentFile": "ssg-ocp4-ds.xml",
-                "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:61254e93bee0656607a4bec5e058cacaf4a907ea7f7ffcd233a6f594ab7d2a00"
+                "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:1a9ed321d28da1ae089684d4bfb1c206a6ca2442f5725656c48c6c309e128e77"
               }
             },
             {
@@ -4010,7 +4010,7 @@ properties:
         features.operators.openshift.io/token-auth-aws: "false"
         features.operators.openshift.io/token-auth-azure: "false"
         features.operators.openshift.io/token-auth-gcp: "false"
-        must-gather-image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:ccaa88ea0f02fd6b0b6d72a7a53d8e42c4cab3fd39a0c6bcb81b8eb9a9fe60b6
+        must-gather-image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:83ea492a55fb2f2bc423ce7d1ccd31644de8ce492e9d273da47a93413fc9282a
         olm.skipRange: '>=0.1.17 <1.8.0'
         operatorframework.io/cluster-monitoring: "true"
         operatorframework.io/suggested-namespace: openshift-compliance
@@ -4112,14 +4112,14 @@ properties:
         name: Red Hat Inc.
         url: www.redhat.com
 relatedImages:
-  - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:e17354bbf4f9358baea77bc2dcd5c576913ad42d0902826335a6b9b37dcf57f1
+  - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:0bc0b7a20ce3c6303a45a699f44d2b90597b6a62846e89a5bca285b3228a9a52
     name: ""
-  - image: registry.redhat.io/compliance/openshift-compliance-content-rhel8@sha256:65f971fa6ba812675f6e857c64f3102e053e0f0151d220a15711b2bcb35f3923
+  - image: registry.redhat.io/compliance/openshift-compliance-content-rhel8@sha256:7b84f08a7f0a808bd92c9540dd5b976b8aa20ed426ce2d646131123e13df60c2
     name: profile
-  - image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:ccaa88ea0f02fd6b0b6d72a7a53d8e42c4cab3fd39a0c6bcb81b8eb9a9fe60b6
+  - image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:83ea492a55fb2f2bc423ce7d1ccd31644de8ce492e9d273da47a93413fc9282a
     name: must-gather
-  - image: registry.redhat.io/compliance/openshift-compliance-openscap-rhel8@sha256:6399f2885b4ca84a2523378f3af12948fbd39d774c91e8cb3655b3e5686ed7d7
+  - image: registry.redhat.io/compliance/openshift-compliance-openscap-rhel8@sha256:26cbd3cedf1b49bf26d638014ca2fb2196e5a2ed915234721b4ac8679e399011
     name: openscap
-  - image: registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:61254e93bee0656607a4bec5e058cacaf4a907ea7f7ffcd233a6f594ab7d2a00
+  - image: registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:1a9ed321d28da1ae089684d4bfb1c206a6ca2442f5725656c48c6c309e128e77
     name: operator
 schema: olm.bundle
