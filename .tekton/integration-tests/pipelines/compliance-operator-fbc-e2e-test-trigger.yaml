@@ -93,11 +93,11 @@ spec:
                 value: "$(params.INDEX_IMAGE)"
             image: registry.redhat.io/openshift4/ose-cli:latest
             script: |
-              # Read the token from the secret file
-              GANGWAY_API_TOKEN=$(cat /secrets/gangway-api-token/gangway_api_token)
+              # Apply delay to stagger concurrent test triggers
+              INITIAL_DELAY=$(( (RANDOM % 60) + 5 ))  # Reduced to 5-65 seconds
+              echo "Initial stagger delay: ${INITIAL_DELAY}s"
+              sleep $INITIAL_DELAY
 
-              echo "Trigger the OpenShift CI job"
-              
               # Create the JSON payload dynamically with the configurable key
               dnf -y install jq
               JSON_PAYLOAD=$(jq -n \
@@ -114,52 +114,73 @@ spec:
               
               echo "JSON payload:"
               echo "${JSON_PAYLOAD}"
+
+              # Read the token from the secret file
+              GANGWAY_API_TOKEN=$(cat /secrets/gangway-api-token/gangway_api_token)
+
+              # Add retry mechanism
+              MAX_RETRIES=3
+              RETRY=0
               
-              RESPONSE=$(curl -X POST -d "${JSON_PAYLOAD}" -H "Content-Type: application/json" -H "Authorization: Bearer ${GANGWAY_API_TOKEN}" "${GANGWAY_API_URL}/v1/executions/${OCP_CI_JOB_NAME}")
-
-              echo "Job trigger response:"
-              echo "${RESPONSE}"
-
-              # Extract job ID from the response
-              JOB_ID=$(echo "${RESPONSE}" | jq -r '.id')
-              echo "Job ID: ${JOB_ID}"
-
-              if [ "${JOB_ID}" != "null" ] && [ -n "${JOB_ID}" ]; then
-                echo "Fetching job details for ID: ${JOB_ID}"
-                
-                # Poll job details until job_url is available
-                MAX_ATTEMPTS=60  # Maximum number of attempts (5 minutes with 5-second intervals)
-                ATTEMPT=0
-                JOB_URL=""
-                
-                while [ ${ATTEMPT} -lt ${MAX_ATTEMPTS} ]; do
-                  echo "Attempt $((ATTEMPT + 1))/${MAX_ATTEMPTS}: Fetching job details..."
-                  
-                  JOB_DETAILS=$(curl -s -X GET -H "Authorization: Bearer ${GANGWAY_API_TOKEN}" "${GANGWAY_API_URL}/v1/executions/${JOB_ID}")
-                  echo "Job details response:"
-                  echo "${JOB_DETAILS}"
-                  
-                  # Extract job_url from the response
-                  JOB_URL=$(echo "${JOB_DETAILS}" | jq -r '.job_url')
-                  
-                  if [ "${JOB_URL}" != "null" ] && [ -n "${JOB_URL}" ] && [ "${JOB_URL}" != "" ]; then
-                    echo "Job URL found: ${JOB_URL}"
-                    break
-                  else
-                    echo "Job URL not yet available, waiting 5 seconds..."
-                    sleep 15
-                    ATTEMPT=$((ATTEMPT + 1))
-                  fi
-                done
-                
-                if [ "${JOB_URL}" = "null" ] || [ -z "${JOB_URL}" ] || [ "${JOB_URL}" = "" ]; then
-                  echo "Job URL not available after ${MAX_ATTEMPTS} attempts"
-                  exit 1
-                else
-                  echo "Final job details with URL:"
-                  echo "${JOB_DETAILS}"
+              while [ ${RETRY} -lt ${MAX_RETRIES} ]; do
+                if [ ${RETRY} -gt 0 ]; then
+                  echo "Retry attempt ${RETRY}/${MAX_RETRIES} - waiting 30 seconds before retry..."
+                  sleep 30
                 fi
-              else
-                echo "Failed to extract job ID from response"
-                exit 1
-              fi
+                
+                echo "Trigger the OpenShift CI job"          
+                RESPONSE=$(curl -X POST -d "${JSON_PAYLOAD}" -H "Content-Type: application/json" -H "Authorization: Bearer ${GANGWAY_API_TOKEN}" "${GANGWAY_API_URL}/v1/executions/${OCP_CI_JOB_NAME}")
+
+                echo "Job trigger response:"
+                echo "${RESPONSE}"
+
+                # Extract job ID from the response
+                JOB_ID=$(echo "${RESPONSE}" | jq -r '.id')
+                echo "Job ID: ${JOB_ID}"
+
+                if [ "${JOB_ID}" != "null" ] && [ -n "${JOB_ID}" ]; then
+                  echo "Fetching job details for ID: ${JOB_ID}"
+                  
+                  # Poll job details until job_url is available
+                  MAX_ATTEMPTS=60  # Maximum number of attempts (5 minutes with 5-second intervals)
+                  ATTEMPT=0
+                  JOB_URL=""
+                  
+                  while [ ${ATTEMPT} -lt ${MAX_ATTEMPTS} ]; do
+                    echo "Attempt $((ATTEMPT + 1))/${MAX_ATTEMPTS}: Fetching job details..."
+                    
+                    JOB_DETAILS=$(curl -s -X GET -H "Authorization: Bearer ${GANGWAY_API_TOKEN}" "${GANGWAY_API_URL}/v1/executions/${JOB_ID}")
+                    echo "Job details response:"
+                    echo "${JOB_DETAILS}"
+                    
+                    # Extract job_url from the response
+                    JOB_URL=$(echo "${JOB_DETAILS}" | jq -r '.job_url')
+                    
+                    if [ "${JOB_URL}" != "null" ] && [ -n "${JOB_URL}" ] && [ "${JOB_URL}" != "" ]; then
+                      echo "Job URL found: ${JOB_URL}"
+                      break
+                    else
+                      echo "Job URL not yet available, waiting 15 seconds..."
+                      sleep 15
+                      ATTEMPT=$((ATTEMPT + 1))
+                    fi
+                  done
+                  
+                  if [ "${JOB_URL}" = "null" ] || [ -z "${JOB_URL}" ] || [ "${JOB_URL}" = "" ]; then
+                    echo "Job URL not available after ${MAX_ATTEMPTS} attempts"
+                    RETRY=$((RETRY + 1))
+                    continue
+                  else
+                    echo "Final job details with URL:"
+                    echo "${JOB_DETAILS}"
+                    exit 0
+                  fi
+                else
+                  echo "Failed to extract job ID from response"
+                  RETRY=$((RETRY + 1))
+                  continue
+                fi
+              done
+              
+              echo "Failed to trigger job after ${MAX_RETRIES} attempts"
+              exit 1
