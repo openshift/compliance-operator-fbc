@@ -12,7 +12,7 @@ NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bun
 REDHAT_REGISTRY_REPO="registry.redhat.io/compliance/openshift-compliance-operator-bundle"
 
 # (Optional) Some additional parameters you might use later
-OP_V="1.8.1"
+OP_V="1.8.2"
 CSV_NEW="compliance-operator.v${OP_V}"
 SKIP_RANGE=">=1.0.0 <${OP_V}"
 
