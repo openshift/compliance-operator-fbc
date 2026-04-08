@@ -6,13 +6,13 @@ IFS=$'\n\t'
 OCP_VERSIONS=(4.12 4.13 4.14 4.15 4.16 4.17 4.18 4.19 4.20 4.21 4.22)
 
 # Old (tag-based) image:
-NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.8"
+NEW_BUNDLE="quay.io/redhat-user-workloads/ocp-isc-tenant/compliance-operator-bundle-release:release-1.9"
 
 # New registry/repo to use, but we’ll attach the old image’s actual digest.
 REDHAT_REGISTRY_REPO="registry.redhat.io/compliance/openshift-compliance-operator-bundle"
 
 # (Optional) Some additional parameters you might use later
-OP_V="1.8.2"
+OP_V="1.9.0"
 CSV_NEW="compliance-operator.v${OP_V}"
 SKIP_RANGE=">=1.0.0 <${OP_V}"
 
