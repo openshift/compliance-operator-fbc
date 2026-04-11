@@ -4839,7 +4839,7 @@ relatedImages:
     name: operator
 schema: olm.bundle
 ---
-image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:e2b0d3a7f03dbcb5096577fa047c77fbe0e41f48ee4daf5c1f9946088e26aaa3
+image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:5b0ca74e0bfe38507d5c0a2075cb5c5edd0623b5164c5258a6905c615170a523
 name: compliance-operator.v1.9.0
 package: compliance-operator
 properties:
@@ -5188,9 +5188,9 @@ properties:
         name: Red Hat Inc.
         url: www.redhat.com
 relatedImages:
-  - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:e2b0d3a7f03dbcb5096577fa047c77fbe0e41f48ee4daf5c1f9946088e26aaa3
+  - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:5b0ca74e0bfe38507d5c0a2075cb5c5edd0623b5164c5258a6905c615170a523
     name: ""
-  - image: registry.redhat.io/compliance/openshift-compliance-content-rhel8@sha256:18fbbfa6f24c34294f33fb30e065fcc9772223c40974a0c47d15bf6e4cc8c4cb
+  - image: registry.redhat.io/compliance/openshift-compliance-content-rhel8@sha256:ae268685a74c0af2b130e69170e38b2478b1e125cc2873e096ced35af879576d
     name: profile
   - image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:d1f394c1054e8bd8ded223b6fc07a83658ffa3c6e78679b67365f546cb4293fd
     name: must-gather
