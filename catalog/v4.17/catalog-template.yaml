@@ -60,6 +60,9 @@ entries:
   - name: compliance-operator.v1.9.1
     replaces: compliance-operator.v1.9.0
     skipRange: '>=1.0.0 <1.9.1'
+  - name: compliance-operator.v1.9.2
+    replaces: compliance-operator.v1.9.1
+    skipRange: '>=1.0.0 <1.9.2'
   name: stable
   package: compliance-operator
   schema: olm.channel
@@ -94,6 +97,8 @@ entries:
 - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:e2cbcab60fad0718e63a8c9bacaca97d205735e968505a56ae1a1c523d5ee2da
   schema: olm.bundle
 - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:dd5ac6b523658a5d8a07c39e20b6538686d8680d16aec8ffb0c0568a586d34be
+  schema: olm.bundle
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:bfe946d2878a37624641a92ed538c77861c355fb4a44a387944d988feca7ca95
   schema: olm.bundle
 schema: olm.template.basic
 
