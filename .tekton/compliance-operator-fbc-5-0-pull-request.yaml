@@ -178,11 +178,22 @@ spec:
       - name: ociArtifactExpiresAfter
         value: $(params.image-expires-after)
       - name: OPM_ARGS
-        value: []
+        value:
+        - alpha
+        - render-template
+        - basic
+        - --migrate-level=bundle-object-to-csv-metadata
+        - -o
+        - json
+        - catalog/v5.0/catalog-template.yaml
       - name: OPM_OUTPUT_PATH
-        value: ""
+        value: catalog/v5.0/compliance-operator/catalog.json
+      - name: CONVERT_TAGS_TO_DIGESTS
+        value: "true"
+      - name: FILE_TO_UPDATE_PULLSPEC
+        value: catalog/v5.0/compliance-operator/catalog.json
       - name: IDMS_PATH
-        value: ""
+        value: .tekton/images-mirror-set.yaml
       runAfter:
       - fbc-inject-lifecycle
       taskRef:

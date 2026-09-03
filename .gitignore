@@ -1,0 +1,3 @@
+# Rendered FBC catalog for 5.0 is generated in-pipeline by run-opm-command
+# from catalog-template.yaml (floating -dev:master tag); do not commit it.
+catalog/v5.0/compliance-operator/catalog.json
