@@ -65,6 +65,9 @@ entries:
   - name: compliance-operator.v1.9.2
     replaces: compliance-operator.v1.9.1
     skipRange: '>=1.0.0 <1.9.2'
+  - name: compliance-operator.v1.10.0
+    replaces: compliance-operator.v1.9.2
+    skipRange: '>=1.0.0 <1.10.0'
 name: stable
 package: compliance-operator
 schema: olm.channel
@@ -5925,5 +5928,358 @@ relatedImages:
   - image: registry.redhat.io/compliance/openshift-compliance-openscap-rhel8@sha256:b1b2cf0bb2aa7029b72b3866ccba5e420462cc2761cf3ae7d7731f85a763c586
     name: openscap
   - image: registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:5dea57e7e693fe5e399b6866d00d4246afda3a755dafdd0bfe4df5a1952a9437
+    name: operator
+schema: olm.bundle
+---
+image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:81a10b224c4fd0de3d828137bbe136144a48dabefb07b64d9f9e0c2e553c6841
+name: compliance-operator.v1.10.0
+package: compliance-operator
+properties:
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ComplianceCheckResult
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ComplianceRemediation
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ComplianceScan
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ComplianceSuite
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: CustomRule
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: Profile
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ProfileBundle
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: Rule
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ScanSetting
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: ScanSettingBinding
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: TailoredProfile
+      version: v1alpha1
+  - type: olm.gvk
+    value:
+      group: compliance.openshift.io
+      kind: Variable
+      version: v1alpha1
+  - type: olm.package
+    value:
+      packageName: compliance-operator
+      version: 1.10.0
+  - type: olm.csv.metadata
+    value:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "ComplianceScan",
+              "metadata": {
+                "name": "example-compliancescan-node"
+              },
+              "spec": {
+                "content": "ssg-rhcos4-ds.xml",
+                "profile": "xccdf_org.ssgproject.content_profile_moderate"
+              }
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "ComplianceScan",
+              "metadata": {
+                "name": "example-compliancescan-platform"
+              },
+              "spec": {
+                "content": "ssg-ocp4-ds.xml",
+                "profile": "xccdf_org.ssgproject.content_profile_moderate",
+                "scanType": "Platform"
+              }
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "ComplianceSuite",
+              "metadata": {
+                "name": "example-compliancesuite"
+              },
+              "spec": {
+                "autoApplyRemediations": false,
+                "scans": [
+                  {
+                    "content": "ssg-rhcos4-ds.xml",
+                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:3da13652826176fc7d096ebe20b3263ee059b90ebdeef8e708058f14b7c087c3",
+                    "name": "workers-scan",
+                    "nodeSelector": {
+                      "node-role.kubernetes.io/worker": ""
+                    },
+                    "profile": "xccdf_org.ssgproject.content_profile_moderate"
+                  },
+                  {
+                    "content": "ssg-ocp4-ds.xml",
+                    "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:3da13652826176fc7d096ebe20b3263ee059b90ebdeef8e708058f14b7c087c3",
+                    "name": "platform-scan",
+                    "profile": "xccdf_org.ssgproject.content_profile_moderate",
+                    "scanType": "Platform"
+                  }
+                ],
+                "schedule": "0 1 * * *"
+              }
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "ProfileBundle",
+              "metadata": {
+                "name": "ocp4"
+              },
+              "spec": {
+                "contentFile": "ssg-ocp4-ds.xml",
+                "contentImage": "registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:3da13652826176fc7d096ebe20b3263ee059b90ebdeef8e708058f14b7c087c3"
+              }
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "autoApplyRemediations": false,
+              "debug": true,
+              "kind": "ScanSetting",
+              "metadata": {
+                "name": "my-companys-constraints"
+              },
+              "rawResultStorage": {
+                "rotation": 10,
+                "size": "2Gi"
+              },
+              "roles": [
+                "worker",
+                "master"
+              ],
+              "schedule": "0 1 * * *"
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "ScanSettingBinding",
+              "metadata": {
+                "name": "nist-moderate"
+              },
+              "profiles": [
+                {
+                  "apiGroup": "compliance.openshift.io/v1alpha1",
+                  "kind": "Profile",
+                  "name": "rhcos4-moderate"
+                }
+              ],
+              "settingsRef": {
+                "apiGroup": "compliance.openshift.io/v1alpha1",
+                "kind": "ScanSetting",
+                "name": "default"
+              }
+            },
+            {
+              "apiVersion": "compliance.openshift.io/v1alpha1",
+              "kind": "TailoredProfile",
+              "metadata": {
+                "name": "example-tailoredprofile"
+              },
+              "spec": {
+                "description": "Example of a tailoredProfile that extends OCP4 FedRAMP Moderate",
+                "disableRules": [
+                  {
+                    "name": "ocp4-file-permissions-node-config",
+                    "rationale": "This breaks X application."
+                  },
+                  {
+                    "name": "ocp4-account-disable-post-pw-expiration",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-accounts-no-uid-except-zero",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-audit-rules-dac-modification-chmod",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-audit-rules-dac-modification-chown",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-audit-rules-dac-modification-fchmod",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-audit-rules-dac-modification-fchmodat",
+                    "rationale": "testing this"
+                  },
+                  {
+                    "name": "ocp4-audit-rules-dac-modification-fchown",
+                    "rationale": "testing this"
+                  }
+                ],
+                "extends": "ocp4-moderate",
+                "setValues": [
+                  {
+                    "name": "ocp4-var-selinux-state",
+                    "rationale": "trolling dwalsh",
+                    "value": "permissive"
+                  }
+                ],
+                "title": "My little profile"
+              }
+            }
+          ]
+        capabilities: Seamless Upgrades
+        categories: Monitoring,Security
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        must-gather-image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:f0db993a42b468291e3af59bd0df3943470c2956808d0a6db1ab09b570e9d915
+        olm.skipRange: '>=0.1.17 <1.10.0'
+        operatorframework.io/cluster-monitoring: "true"
+        operatorframework.io/suggested-namespace: openshift-compliance
+        operators.openshift.io/infrastructure-features: '["disconnected", "fips", "proxy-aware"]'
+        operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine", "OpenShift Container Platform", "OpenShift Platform Plus"]'
+        operators.operatorframework.io/builder: operator-sdk-v1.19.0+git
+        operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+        repository: https://github.com/ComplianceAsCode/compliance-operator
+        support: Red Hat Inc.
+      apiServiceDefinitions: {}
+      crdDescriptions:
+        owned:
+          - description: ComplianceCheckResult represent a result of a single compliance "test"
+            kind: ComplianceCheckResult
+            name: compliancecheckresults.compliance.openshift.io
+            version: v1alpha1
+          - description: ComplianceRemediation represents a remediation that can be applied to the cluster to fix the found issues.
+            displayName: Compliance Remediation
+            kind: ComplianceRemediation
+            name: complianceremediations.compliance.openshift.io
+            version: v1alpha1
+          - description: ComplianceScan represents a scan with a certain configuration that will be applied to objects of a certain entity in the host. These could be nodes that apply to a certain nodeSelector, or the cluster itself.
+            displayName: Compliance Scan
+            kind: ComplianceScan
+            name: compliancescans.compliance.openshift.io
+            version: v1alpha1
+          - description: ComplianceSuite represents a set of scans that will be applied to the cluster. These should help deployers achieve a certain compliance target.
+            displayName: Compliance Suite
+            kind: ComplianceSuite
+            name: compliancesuites.compliance.openshift.io
+            version: v1alpha1
+          - description: CustomRule represents a user-created rule for use with TailoredProfiles to execute arbitrary checks against the cluster.
+            displayName: Custom Rule
+            kind: CustomRule
+            name: customrules.compliance.openshift.io
+            version: v1alpha1
+          - description: ProfileBundle is the Schema for the profilebundles API
+            displayName: Profile Bundle
+            kind: ProfileBundle
+            name: profilebundles.compliance.openshift.io
+            version: v1alpha1
+          - description: Profile is the Schema for the profiles API
+            kind: Profile
+            name: profiles.compliance.openshift.io
+            version: v1alpha1
+          - description: Rule is the Schema for the rules API
+            kind: Rule
+            name: rules.compliance.openshift.io
+            version: v1alpha1
+          - description: ScanSettingBinding is the Schema for the scansettingbindings API
+            displayName: Scan Setting Binding
+            kind: ScanSettingBinding
+            name: scansettingbindings.compliance.openshift.io
+            version: v1alpha1
+          - description: ScanSetting is the Schema for the scansettings API
+            kind: ScanSetting
+            name: scansettings.compliance.openshift.io
+            version: v1alpha1
+          - description: TailoredProfile is the Schema for the tailoredprofiles API
+            displayName: Tailored Profile
+            kind: TailoredProfile
+            name: tailoredprofiles.compliance.openshift.io
+            version: v1alpha1
+          - description: Variable describes a tunable in the XCCDF profile
+            kind: Variable
+            name: variables.compliance.openshift.io
+            version: v1alpha1
+      description: An operator which runs OpenSCAP and allows you to keep your cluster compliant with the security benchmark you need.
+      displayName: Compliance Operator
+      installModes:
+        - supported: true
+          type: OwnNamespace
+        - supported: true
+          type: SingleNamespace
+        - supported: true
+          type: MultiNamespace
+        - supported: true
+          type: AllNamespaces
+      keywords:
+        - security
+        - compliance
+        - openscap
+        - audit
+      labels:
+        operatorframework.io/arch.amd64: supported
+        operatorframework.io/arch.arm64: supported
+        operatorframework.io/arch.ppc64le: supported
+        operatorframework.io/arch.s390x: supported
+      links:
+        - name: Compliance Operator upstream repository
+          url: https://github.com/ComplianceAsCode/compliance-operator
+        - name: Compliance Operator documentation
+          url: https://docs.openshift.com/container-platform/latest/security/compliance_operator/co-overview.html
+      maintainers:
+        - email: support@redhat.com
+          name: Red Hat Support
+      maturity: alpha
+      provider:
+        name: Red Hat Inc.
+        url: www.redhat.com
+relatedImages:
+  - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:81a10b224c4fd0de3d828137bbe136144a48dabefb07b64d9f9e0c2e553c6841
+    name: ""
+  - image: registry.redhat.io/compliance/openshift-compliance-content-rhel8@sha256:99dae09cc651e18ad5a37e827c7304fe8119b43de8a0f147a13ef4d172d2c625
+    name: profile
+  - image: registry.redhat.io/compliance/openshift-compliance-must-gather-rhel8@sha256:f0db993a42b468291e3af59bd0df3943470c2956808d0a6db1ab09b570e9d915
+    name: must-gather
+  - image: registry.redhat.io/compliance/openshift-compliance-openscap-rhel8@sha256:031fa91d6ec10a91cecdb8f69536d6ff30c4b17437a2bfce35ae2d8fe56a87ac
+    name: openscap
+  - image: registry.redhat.io/compliance/openshift-compliance-rhel8-operator@sha256:3da13652826176fc7d096ebe20b3263ee059b90ebdeef8e708058f14b7c087c3
     name: operator
 schema: olm.bundle
