@@ -103,7 +103,7 @@ entries:
   schema: olm.bundle
 - image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:bfe946d2878a37624641a92ed538c77861c355fb4a44a387944d988feca7ca95
   schema: olm.bundle
-- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:81a10b224c4fd0de3d828137bbe136144a48dabefb07b64d9f9e0c2e553c6841
+- image: registry.redhat.io/compliance/openshift-compliance-operator-bundle@sha256:d570f559988ff9ac6dae93191593d32fe72350c9e869ae72c0d9e27d2cdb66c5
   schema: olm.bundle
 schema: olm.template.basic
 
